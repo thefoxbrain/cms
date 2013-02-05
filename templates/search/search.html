@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta name="generator" content="HTML Tidy for Windows (vers 14 February 2006), see www.w3.org">
+    <title>
+      Search
+    </title>
+  </head>
+  <body>
+    <form method="get" action="/search/">
+      <p>
+        <label for="id_q">Search:</label> 
+		<input type="text" name="q" id="id_q" value="{{ query }}"> 
+		<input type="submit" value="Submit">
+      </p>
+    </form>{% if keyword_results or results %}
+    <p>
+      You searched for "{{ query }}".
+    </p>{% if keyword_results %}
+    <p>
+      Recommended pages:
+    </p>
+    <ul>
+      <li style="list-style: none">{% for page in keyword_results %}
+      </li>
+      <li>
+        <a href="{{ page.get_absolute_url }}">{{ page.title }}</a>
+      </li>
+      <li style="list-style: none">{% endfor %}
+      </li>
+    </ul>{% endif %} {% if results %}
+    <p>
+      Search results:
+    </p>
+    <ul>
+      <li style="list-style: none">{% for page in results %}
+      </li>
+      <li>
+        <a href="{{ page.get_absolute_url }}">{{ page.title }}</a>
+      </li>
+      <li style="list-style: none">{% endfor %}
+      </li>
+    </ul>{% endif %} {% endif %} {% if query and not keyword_results and not results %}
+    <p>
+      No results found.
+    </p>{% else %}
+    <p>
+      Type a search query into the box above, and press "Submit" to search.
+    </p>{% endif %}
+  </body>
+</html>
